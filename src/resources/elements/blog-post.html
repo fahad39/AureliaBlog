@@ -1,0 +1,17 @@
+<template>
+  <require from="../value-converters/date-format"></require>
+  <article class="blog-post" >
+    
+    <h2 class="blog-post-title">${post.title}</h2>
+    <p class="blog-post-meta">${post.createdAt | dateFormat} by <a href="#">${post.author}</a></p>
+    
+    <nav class="blog-pagination" aria-label="Pagination">
+
+      <a class="btn btn-outline-primary" repeat.for="tag of post.tags" href="#">${tag}</a>
+    </nav>
+   
+
+    <p>${post.body}</p>
+    <hr>
+   </article>
+</template>
