@@ -7,7 +7,9 @@
     
     <nav class="blog-pagination" aria-label="Pagination">
 
-      <a class="btn btn-outline-primary" repeat.for="tag of post.tags" href="#">${tag}</a>
+      <a repeat.for="tag of post.tags" href="#">
+        <span class="badge rounded-pill bg-primary">${tag}</span>
+      </a>
     </nav>
    
 
