@@ -44,6 +44,18 @@ export class App {
         moduleId: PLATFORM.moduleName("posts/view"),
         title: "View-Post",
       },
+      {
+        route: "archive/:archive",
+        name: "archive-view",
+        moduleId: PLATFORM.moduleName("posts/archive-view"),
+        title: "View Post by archive",
+      },
+      {
+        route: "tag/:tag",
+        name: "tag-view",
+        moduleId: PLATFORM.moduleName("posts/tag-view"),
+        title: "View Post by Archive",
+      },
     ]);
   }
 }
