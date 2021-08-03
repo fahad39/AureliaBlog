@@ -7,7 +7,7 @@
     
     <nav class="blog-pagination" aria-label="Pagination">
 
-      <a repeat.for="tag of post.tags" href="#">
+      <a repeat.for="tag of post.tags" route-href="route:tag-view;params.bind:{tag}">
         <span class="badge rounded-pill bg-primary">${tag}</span>
       </a>
     </nav>

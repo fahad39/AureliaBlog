@@ -1,3 +1,12 @@
 <template>
-  <h1>${message}</h1>
+  <require from="../resources/elements/blog-post"></require>
+  <div  if.bind="error" >${error}</div>
+  <div class="alert alert-primary">Viewing Post by Tag: ${tag}</div>
+  <div repeat.for="post of posts">
+    <blog-post post.bind="post"></blog-post>
+
+    <a class="btn btn-outline-primary" route-href="route:post-view;params.bind:{slug:post.slug}" >View Post &raquo;</a>
+    <hr>
+  </div>
+   
 </template>
