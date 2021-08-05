@@ -1,0 +1,8 @@
+<template>
+  <h1>Login In</h1>
+  <div  if.bind="error" class="alert alert-danger" >${error}</div>
+  <form submit.delegate="Login()">
+    <input type="text" placeholder="Your name" value.bind="name" />
+    <button type="submit">Log in </button>
+  </form>
+</template>

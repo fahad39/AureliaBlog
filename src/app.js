@@ -1,13 +1,23 @@
 import { inject, PLATFORM } from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
 import { PostService } from "./common/services/post-service";
+import { AuthService } from "./common/services/auth-service";
 
-@inject(PostService)
+@inject(PostService, AuthService, EventAggregator)
 export class App {
-  constructor(PostService) {
+  constructor(PostService, AuthService, EventAggregator) {
     this.postService = PostService;
+    this.authService = AuthService;
+    this.ea = EventAggregator;
   }
 
   attached() {
+    this.user = this.authService.currentUser;
+
+    this.subscription = this.ea.subscribe("currentUser", (currentUser) => {
+      this.user = this.authService.currentUser;
+    });
+
     this.postService
       .allTags()
       .then((data) => {
@@ -56,7 +66,29 @@ export class App {
         moduleId: PLATFORM.moduleName("posts/tag-view"),
         title: "View Post by Archive",
       },
+      {
+        route: "login",
+        name: "login",
+        moduleId: PLATFORM.moduleName("auth/login"),
+        title: "Log In",
+      },
     ]);
+  }
+
+  detached() {
+    this.subscription.dispose();
+  }
+
+  logOut() {
+    this.authService
+      .logout()
+      .then((data) => {
+        this.ea.publish("currentUser", null);
+        console.log(data.success);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 }
 
